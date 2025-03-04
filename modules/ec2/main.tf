@@ -64,11 +64,11 @@ set -e
 
 # íË??ó 
 S3_BUCKET_NAME="${module.s3_bucket.bucket_name}"
-S3_INPUT_PATH="s3://${S3_BUCKET_NAME}/input/"
-S3_OUTPUT_PATH="s3://${S3_BUCKET_NAME}/output/"
+S3_INPUT_PATH="s3://$S3_BUCKET_NAME/input/"
+S3_OUTPUT_PATH="s3://$S3_BUCKET_NAME/output/"
 LOCAL_INPUT_DIR="/data/input"
 LOCAL_OUTPUT_DIR="/data/output"
-OUTPUT_CSV="${LOCAL_OUTPUT_DIR}/output.csv"
+OUTPUT_CSV="$LOCAL_OUTPUT_DIR/output.csv"
 
 # 1. çXêVån?õÛà¿ëïïKóvçHãÔ
 sudo apt-get update -y
@@ -90,7 +90,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 # 5. ìo? AWS ECR õÛùféÊ Docker ?ëú
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 REGION="ap-northeast-1"
-ECR_URL="${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/batch-test-repo"
+ECR_URL="$ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/batch-test-repo"
 
 aws ecr get-login-password --region "$REGION" | sudo docker login --username AWS --password-stdin "$ECR_URL"
 sudo docker pull "$ECR_URL:latest"
