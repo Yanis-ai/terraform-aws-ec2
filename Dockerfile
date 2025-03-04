@@ -1,13 +1,13 @@
 FROM python:3.8-slim
 
-# å¿…è¦ãªãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã¾ã™
+# •K—v‚ÈƒpƒbƒP[ƒW‚ðƒCƒ“ƒXƒg[ƒ‹‚µ‚Ü‚·
 RUN apt-get update && apt-get install -y tar
 
-# ä½œæ¥­ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’è¨­å®šã™ã‚‹
+# ì‹ÆƒfƒBƒŒƒNƒgƒŠ‚ðÝ’è‚·‚é
 WORKDIR /app
 
-# Pythonã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’ã‚¤ãƒ¡ãƒ¼ã‚¸ã«ã‚³ãƒ”ãƒ¼ã™ã‚‹
+# PythonƒXƒNƒŠƒvƒg‚ðƒCƒ[ƒW‚ÉƒRƒs[‚·‚é
 COPY 02_extract_files.py /app/extract_files.py
 
-# Pythonã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å®Ÿè¡Œã™ã‚‹ã‚³ãƒžãƒ³ãƒ‰ã‚’è¨­å®šã™ã‚‹
+# PythonƒXƒNƒŠƒvƒg‚ðŽÀs‚·‚éƒRƒ}ƒ“ƒh‚ðÝ’è‚·‚é
 CMD ["python", "/app/extract_files.py"]

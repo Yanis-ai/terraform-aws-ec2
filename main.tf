@@ -3,18 +3,18 @@ provider "aws" {
 }
 
 variable "test_prefix" {
-  description = "ãƒãƒƒãƒãƒ†ã‚¹ãƒˆç’°å¢ƒã®ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹"
+  description = "ƒoƒbƒ`ƒeƒXƒgŠÂ‹«‚ÌƒvƒŒƒtƒBƒbƒNƒX"
   type        = string
   default     = "batch-test"
 }
 
 variable "bucket_name_prefix" {
-  description = "S3ãƒã‚±ãƒƒãƒˆåã®ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹"
+  description = "S3ƒoƒPƒbƒg–¼‚ÌƒvƒŒƒtƒBƒbƒNƒX"
   default     = "batch-test-bucket"
 }
 
 variable "key_pair_name" {
-  description = "EC2ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”¨ã®ã‚­ãƒ¼ãƒšã‚¢ã®åå‰"
+  description = "EC2ƒCƒ“ƒXƒ^ƒ“ƒX—p‚ÌƒL[ƒyƒA‚Ì–¼‘O"
   type        = string
   default     = "ssh-key-pair"
 }
@@ -38,10 +38,10 @@ module "ec2_instance" {
   source = "./modules/ec2"
   test_prefix = var.test_prefix
   key_pair_name = var.key_pair_name
-  ami_id = "ami-0a290015b99140cd1"   # å®Ÿéš›ã®AMI IDã«ç½®ãæ›ãˆã¦ãã ã•ã„
-  instance_type = "t2.micro"         # å¿…è¦ãªã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚¿ã‚¤ãƒ—ã‚’é¸æŠžã—ã¦ãã ã•ã„
-  subnet_id = module.vpc.subnet_ids[0]  # è¤‡æ•°ã®ã‚µãƒ–ãƒãƒƒãƒˆãŒã‚ã‚‹å‰æã§é¸æŠžã—ã¦ãã ã•ã„
-  security_group = module.vpc.security_group_id #å…ˆã«ä½œæˆã—ãŸã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚°ãƒ«ãƒ¼ãƒ—ã‚’ä½¿ç”¨
+  ami_id = "ami-0a290015b99140cd1"   # ŽÀÛ‚ÌAMI ID‚É’u‚«Š·‚¦‚Ä‚­‚¾‚³‚¢
+  instance_type = "t2.micro"         # •K—v‚ÈƒCƒ“ƒXƒ^ƒ“ƒXƒ^ƒCƒv‚ð‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢
+  subnet_id = module.vpc.subnet_ids[0]  # •¡”‚ÌƒTƒuƒlƒbƒg‚ª‚ ‚é‘O’ñ‚Å‘I‘ð‚µ‚Ä‚­‚¾‚³‚¢
+  security_group = module.vpc.security_group_id #æ‚Éì¬‚µ‚½ƒZƒLƒ…ƒŠƒeƒBƒOƒ‹[ƒv‚ðŽg—p
   
 }
 
@@ -70,6 +70,6 @@ resource "null_resource" "push_docker_image" {
 }
 
 output "subnet_id" {
-  description = "ä½œæˆã•ã‚ŒãŸã‚µãƒ–ãƒãƒƒãƒˆID"
+  description = "ì¬‚³‚ê‚½ƒTƒuƒlƒbƒgID"
   value       = module.vpc.subnet_ids
 }

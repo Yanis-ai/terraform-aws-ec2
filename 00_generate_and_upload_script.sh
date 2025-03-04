@@ -1,16 +1,16 @@
 #!/bin/bash
 
-mkdir -p ./testfiles  # åˆ›å»ºtestfilesç›®å½•ï¼ˆå¦‚æœä¸å­˜åœ¨ï¼‰
+mkdir -p ./testfiles  # ?Œštestfiles–Ú?i”@‰Ê•s‘¶İj
 
 for ((i=1; i<=1000; i++))
 do
-  # åˆ›å»ºä¸€ä¸ªåŒ…å«éšæœºå†…å®¹çš„1MBæ–‡ä»¶
+  # ?Œšˆê˜¢•ïŠÜŠ÷“à—e“I1MB•¶Œ
   head -c 1M /dev/urandom > "test_file_$i.txt"
 
   if (( $i % 100 == 0 ))
   then
-    archive_name="test_files_${i}_$(($i-99)).tar.gz"  # æ›´æ–°äº†æ–‡ä»¶åºå·èŒƒå›´
-    file_list=$(seq -f "test_file_%g.txt" $(($i-99)) $i)  # æ›´æ–°äº†æ–‡ä»¶åºå·èŒƒå›´
+    archive_name="test_files_${i}_$(($i-99)).tar.gz"  # XV—¹•¶Œ˜†ä—?
+    file_list=$(seq -f "test_file_%g.txt" $(($i-99)) $i)  # XV—¹•¶Œ˜†ä—?
     tar -czvf "./testfiles/$archive_name" $file_list
     rm $file_list
   fi

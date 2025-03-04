@@ -1,20 +1,20 @@
 #!/bin/bash
 set -euo pipefail
 
-# å¤‰æ•°ã®è¨­å®š
+# •Ï”‚Ìİ’è
 REPO_NAME="batch-test-repo"
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
 REGION="ap-northeast-1"
 ECR_URL="${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${REPO_NAME}"
 
-# Dockerã‚¤ãƒ¡ãƒ¼ã‚¸ã®ãƒ“ãƒ«ãƒ‰
+# DockerƒCƒ[ƒW‚Ìƒrƒ‹ƒh
 docker build -t "${REPO_NAME}" .
 
-# AWS ECRã¸ã®ãƒ­ã‚°ã‚¤ãƒ³
+# AWS ECR‚Ö‚ÌƒƒOƒCƒ“
 aws ecr get-login-password --region "${REGION}" | docker login --username AWS --password-stdin "${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com"
 
-# Dockerã‚¤ãƒ¡ãƒ¼ã‚¸ã«ã‚¿ã‚°ã‚’ä»˜ã‘ã‚‹
+# DockerƒCƒ[ƒW‚Éƒ^ƒO‚ğ•t‚¯‚é
 docker tag "${REPO_NAME}:latest" "${ECR_URL}:latest"
 
-# Dockerã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ECRã«ãƒ—ãƒƒã‚·ãƒ¥ã™ã‚‹
+# DockerƒCƒ[ƒW‚ğECR‚ÉƒvƒbƒVƒ…‚·‚é
 docker push "${ECR_URL}:latest"
