@@ -1,17 +1,17 @@
-# VPCã®IDã‚’å‡ºåŠ›ã™ã‚‹
+# VPC‚ÌID‚ğo—Í‚·‚é
 output "vpc_id" {
-  description = "ä½œæˆã•ã‚ŒãŸVPCã®ID"
+  description = "ì¬‚³‚ê‚½VPC‚ÌID"
   value       = aws_vpc.main.id
 }
 
-# ã‚µãƒ–ãƒãƒƒãƒˆã®IDã‚’å‡ºåŠ›ã™ã‚‹
+# ƒTƒuƒlƒbƒg‚ÌID‚ğo—Í‚·‚é
 output "subnet_ids" {
-  description = "ä½œæˆã•ã‚ŒãŸã‚µãƒ–ãƒãƒƒãƒˆã®IDãƒªã‚¹ãƒˆ"
+  description = "ì¬‚³‚ê‚½ƒTƒuƒlƒbƒg‚ÌIDƒŠƒXƒg"
   value       = [for subnet in aws_subnet.subnet : subnet.id]
 }
 
-# SSHã‚¢ã‚¯ã‚»ã‚¹ç”¨ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚°ãƒ«ãƒ¼ãƒ—ã®IDã‚’å‡ºåŠ›ã™ã‚‹
+# SSHƒAƒNƒZƒX—pƒZƒLƒ…ƒŠƒeƒBƒOƒ‹[ƒv‚ÌID‚ğo—Í‚·‚é
 output "security_group_id" {
-  description = "SSHã‚¢ã‚¯ã‚»ã‚¹ç”¨ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚°ãƒ«ãƒ¼ãƒ—ã®ID"
+  description = "SSHƒAƒNƒZƒX—pƒZƒLƒ…ƒŠƒeƒBƒOƒ‹[ƒv‚ÌID"
   value       = aws_security_group.ssh_access.id
 }

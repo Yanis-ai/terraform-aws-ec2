@@ -1,5 +1,5 @@
-# ECRãƒªãƒã‚¸ãƒˆãƒªã®URLã‚’å‡ºåŠ›ã™ã‚‹
+# ECRƒŠƒ|ƒWƒgƒŠ‚ÌURL‚ğo—Í‚·‚é
 output "repository_url" {
-  description = "ä½œæˆã•ã‚ŒãŸECRãƒªãƒã‚¸ãƒˆãƒªã®URL"
+  description = "ì¬‚³‚ê‚½ECRƒŠƒ|ƒWƒgƒŠ‚ÌURL"
   value       = aws_ecr_repository.my_ecr_repo.repository_url
 }

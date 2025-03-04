@@ -1,4 +1,4 @@
 variable "test_prefix" {
-  description = "繝舌ャ繝√ユ繧ｹ繝育腸蠅�縺ｮ繝励Ξ繝輔ぅ繝�繧ｯ繧ｹ"
+  description = "バッチテスト環境のプレフィックス"
   type        = string
 }

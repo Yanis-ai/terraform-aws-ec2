@@ -1,4 +1,4 @@
 output "bucket_name" {
-  description = "S3繝舌こ繝�繝医�ｮ蜷榊燕"
+  description = "S3バケットの名前"
   value       = aws_s3_bucket.normal_bucket.bucket
 }

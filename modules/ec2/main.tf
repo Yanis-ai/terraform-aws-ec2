@@ -1,64 +1,64 @@
-# æ–°ã—ã„SSHã‚­ãƒ¼ãƒšã‚¢ã‚’ç”Ÿæˆã™ã‚‹
+# V‚µ‚¢SSHƒL[ƒyƒA‚ğ¶¬‚·‚é
 resource "tls_private_key" "ssh_key" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
 
-# ãƒ­ãƒ¼ã‚«ãƒ«ã«ãƒ—ãƒ©ã‚¤ãƒ™ãƒ¼ãƒˆã‚­ãƒ¼ã‚’ä¿å­˜ã™ã‚‹
+# ƒ[ƒJƒ‹‚Éƒvƒ‰ƒCƒx[ƒgƒL[‚ğ•Û‘¶‚·‚é
 resource "local_file" "private_key" {
   content         = tls_private_key.ssh_key.private_key_pem
   filename        = "${path.module}/private_key.pem"
   file_permission = "0600"
 }
 
-# AWSä¸Šã§SSHã‚­ãƒ¼ãƒšã‚¢ã‚’ä½œæˆã™ã‚‹
+# AWSã‚ÅSSHƒL[ƒyƒA‚ğì¬‚·‚é
 resource "aws_key_pair" "ssh_key_pair" {
   key_name   = var.key_pair_name
   public_key = tls_private_key.ssh_key.public_key_openssh
 }
 
-# EC2ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ä½œæˆã™ã‚‹
+# EC2ƒCƒ“ƒXƒ^ƒ“ƒX‚ğì¬‚·‚é
 resource "aws_instance" "ec2_instance" {
-  ami                    = var.ami_id            # å®Ÿéš›ã®AMI IDã«ç½®ãæ›ãˆã¦ãã ã•ã„
-  instance_type          = var.instance_type     # å¿…è¦ãªEC2ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚¿ã‚¤ãƒ—ã‚’é¸æŠã—ã¦ãã ã•ã„
-  subnet_id              = var.subnet_id         # ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’é…ç½®ã™ã‚‹ã‚µãƒ–ãƒãƒƒãƒˆ
+  ami                    = var.ami_id            # ÀÛ‚ÌAMI ID‚É’u‚«Š·‚¦‚Ä‚­‚¾‚³‚¢
+  instance_type          = var.instance_type     # •K—v‚ÈEC2ƒCƒ“ƒXƒ^ƒ“ƒXƒ^ƒCƒv‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢
+  subnet_id              = var.subnet_id         # ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ”z’u‚·‚éƒTƒuƒlƒbƒg
   key_name               = aws_key_pair.ssh_key_pair.key_name
 
   associate_public_ip_address = true
-  security_groups             = [var.security_group]  # ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚°ãƒ«ãƒ¼ãƒ—
+  security_groups             = [var.security_group]  # ƒZƒLƒ…ƒŠƒeƒBƒOƒ‹[ƒv
 
   tags = {
     Name = "${var.test_prefix}-ec2-instance"
   }
 }
 
-# Dockerã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã—ã€ã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ãƒ—ãƒ«ã™ã‚‹ã‚¹ã‚¯ãƒªãƒ—ãƒˆ
+# Docker‚ğƒCƒ“ƒXƒg[ƒ‹‚µAƒCƒ[ƒW‚ğƒvƒ‹‚·‚éƒXƒNƒŠƒvƒg
 locals {
   install_docker_pull_image_script = <<EOT
 #!/bin/bash
-# ã‚·ã‚¹ãƒ†ãƒ ã‚’æ›´æ–°
+# ƒVƒXƒeƒ€‚ğXV
 sudo apt-get update -y
-# å¿…è¦ãªä¾å­˜é–¢ä¿‚ã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
+# •K—v‚ÈˆË‘¶ŠÖŒW‚ğƒCƒ“ƒXƒg[ƒ‹
 sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
-# Dockerã®å…¬å¼GPGéµã‚’è¿½åŠ 
+# Docker‚ÌŒö®GPGŒ®‚ğ’Ç‰Á
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-# Dockerã®ãƒªãƒã‚¸ãƒˆãƒªã‚’è¿½åŠ 
+# Docker‚ÌƒŠƒ|ƒWƒgƒŠ‚ğ’Ç‰Á
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-# ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ãƒªã‚¹ãƒˆã‚’æ›´æ–°
+# ƒpƒbƒP[ƒWƒŠƒXƒg‚ğXV
 sudo apt-get update -y
-# Dockerã‚’ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«
+# Docker‚ğƒCƒ“ƒXƒg[ƒ‹
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io
 
-# AWS ECRã«ãƒ­ã‚°ã‚¤ãƒ³
+# AWS ECR‚ÉƒƒOƒCƒ“
 account_id=$(aws sts get-caller-identity --query Account --output text)
 aws ecr get-login-password --region "ap-northeast-1" | sudo docker login --username AWS --password-stdin $account_id.dkr.ecr.ap-northeast-1.amazonaws.com
 
-# Dockerã‚¤ãƒ¡ãƒ¼ã‚¸ã‚’ãƒ—ãƒ«
+# DockerƒCƒ[ƒW‚ğƒvƒ‹
 sudo docker pull $account_id.dkr.ecr.ap-northeast-1.amazonaws.com/batch-test-repo:latest
 EOT
 }
 
-# null_resource ã‚’ä½¿ç”¨ã—ã¦Dockerã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã‚¹ã‚¯ãƒªãƒ—ãƒˆã‚’å®Ÿè¡Œ
+# null_resource ‚ğg—p‚µ‚ÄDockerƒCƒ“ƒXƒg[ƒ‹ƒXƒNƒŠƒvƒg‚ğÀs
 resource "null_resource" "install_docker" {
   provisioner "local-exec" {
     command = <<EOT

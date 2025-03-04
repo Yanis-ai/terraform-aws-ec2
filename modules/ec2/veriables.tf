@@ -1,30 +1,30 @@
 variable "test_prefix" {
-  description = "ãƒãƒƒãƒãƒ†ã‚¹ãƒˆç’°å¢ƒã®ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹"
+  description = "ƒoƒbƒ`ƒeƒXƒgŠÂ‹«‚ÌƒvƒŒƒtƒBƒbƒNƒX"
   type        = string
 }
 
 variable "key_pair_name" {
-  description = "SSHã‚­ãƒ¼ãƒšã‚¢ã®åå‰"
+  description = "SSHƒL[ƒyƒA‚Ì–¼‘O"
   type        = string
 }
 
 variable "ami_id" {
-  description = "EC2ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®AMI ID"
+  description = "EC2ƒCƒ“ƒXƒ^ƒ“ƒX‚ÌAMI ID"
   type        = string
 }
 
 variable "instance_type" {
-  description = "EC2ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ã‚¿ã‚¤ãƒ—"
+  description = "EC2ƒCƒ“ƒXƒ^ƒ“ƒX‚Ìƒ^ƒCƒv"
   type        = string
   default     = "t2.micro"
 }
 
 variable "subnet_id" {
-  description = "EC2ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’èµ·å‹•ã™ã‚‹ã‚µãƒ–ãƒãƒƒãƒˆID"
+  description = "EC2ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ‹N“®‚·‚éƒTƒuƒlƒbƒgID"
   type        = string
 }
 
 variable "security_group" {
-  description = "EC2ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã«å‰²ã‚Šå½“ã¦ã‚‹ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚°ãƒ«ãƒ¼ãƒ—"
+  description = "EC2ƒCƒ“ƒXƒ^ƒ“ƒX‚ÉŠ„‚è“–‚Ä‚éƒZƒLƒ…ƒŠƒeƒBƒOƒ‹[ƒv"
   type        = string
 }

@@ -1,4 +1,4 @@
 variable "bucket_name_prefix" {
-  description = "S3ãƒã‚±ãƒƒãƒˆã®ãƒ—ãƒ¬ãƒ•ã‚£ãƒƒã‚¯ã‚¹ã‚’æŒ‡å®š"
+  description = "S3ƒoƒPƒbƒg‚ÌƒvƒŒƒtƒBƒbƒNƒX‚ğw’è"
   type        = string
 }

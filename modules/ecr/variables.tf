@@ -1,4 +1,4 @@
 variable "repository_name" {
-  description = "ECR繝ｪ繝昴ず繝医Μ縺ｮ蜷榊燕"
+  description = "ECRリポジトリの名前"
   type        = string
 }

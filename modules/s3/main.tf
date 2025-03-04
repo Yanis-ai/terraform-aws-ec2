@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "normal_bucket" {
   }
 }
 
-# ãƒãƒ¼ã‚¸ãƒ§ãƒ³ç®¡ç†ã‚’æœ‰åŠ¹åŒ–ã™ã‚‹
+# ƒo[ƒWƒ‡ƒ“ŠÇ—‚ğ—LŒø‰»‚·‚é
 resource "aws_s3_bucket_versioning" "normal_bucket_versioning" {
   bucket = aws_s3_bucket.normal_bucket.id
   versioning_configuration {
@@ -23,7 +23,7 @@ resource "aws_s3_bucket_versioning" "normal_bucket_versioning" {
   }
 }
 
-# ã‚µãƒ¼ãƒãƒ¼ã‚µã‚¤ãƒ‰æš—å·åŒ–ã‚’è¨­å®šã™ã‚‹
+# ƒT[ƒo[ƒTƒCƒhˆÃ†‰»‚ğİ’è‚·‚é
 resource "aws_s3_bucket_server_side_encryption_configuration" "normal_bucket_encryption" {
   bucket = aws_s3_bucket.normal_bucket.bucket
   rule {
@@ -36,7 +36,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "normal_bucket_enc
   }
 }
 
-# ãƒã‚±ãƒƒãƒˆæ‰€æœ‰æ¨©åˆ¶å¾¡ã‚’è¨­å®šã™ã‚‹
+# ƒoƒPƒbƒgŠ—LŒ §Œä‚ğİ’è‚·‚é
 resource "aws_s3_bucket_ownership_controls" "normal_bucket_ownership_controls" {
   bucket = aws_s3_bucket.normal_bucket.bucket
   rule {
@@ -47,7 +47,7 @@ resource "aws_s3_bucket_ownership_controls" "normal_bucket_ownership_controls" {
   }
 }
 
-# ã‚¢ã‚¯ã‚»ã‚¹åˆ¶å¾¡ãƒªã‚¹ãƒˆ (ACL) ã‚’è¨­å®šã™ã‚‹
+# ƒAƒNƒZƒX§ŒäƒŠƒXƒg (ACL) ‚ğİ’è‚·‚é
 resource "aws_s3_bucket_acl" "normal_bucket_acl" {
   depends_on = [aws_s3_bucket_ownership_controls.normal_bucket_ownership_controls]
   bucket     = aws_s3_bucket.normal_bucket.id
@@ -57,7 +57,7 @@ resource "aws_s3_bucket_acl" "normal_bucket_acl" {
   }
 }
 
-# ãƒ‘ãƒ–ãƒªãƒƒã‚¯ã‚¢ã‚¯ã‚»ã‚¹ã®ãƒ–ãƒ­ãƒƒã‚¯è¨­å®šã‚’æ§‹æˆã™ã‚‹
+# ƒpƒuƒŠƒbƒNƒAƒNƒZƒX‚ÌƒuƒƒbƒNİ’è‚ğ\¬‚·‚é
 resource "aws_s3_bucket_public_access_block" "normal_bucket_public_access_block" {
   bucket                  = aws_s3_bucket.normal_bucket.id
   block_public_acls       = true

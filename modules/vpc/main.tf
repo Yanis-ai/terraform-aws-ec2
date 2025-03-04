@@ -1,4 +1,4 @@
-# VPCã‚’ä½œæˆã™ã‚‹
+# VPC‚ğì¬‚·‚é
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
   tags = {
@@ -6,7 +6,7 @@ resource "aws_vpc" "main" {
   }
 }
 
-# ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒƒãƒˆã‚²ãƒ¼ãƒˆã‚¦ã‚§ã‚¤ã‚’ä½œæˆã™ã‚‹
+# ƒCƒ“ƒ^[ƒlƒbƒgƒQ[ƒgƒEƒFƒC‚ğì¬‚·‚é
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
   tags = {
@@ -14,7 +14,7 @@ resource "aws_internet_gateway" "igw" {
   }
 }
 
-# åˆ©ç”¨å¯èƒ½ãªã‚¢ãƒ™ã‚¤ãƒ©ãƒ“ãƒªãƒ†ã‚£ã‚¾ãƒ¼ãƒ³ã‚’å–å¾—ã™ã‚‹
+# —˜—p‰Â”\‚ÈƒAƒxƒCƒ‰ƒrƒŠƒeƒBƒ][ƒ“‚ğæ“¾‚·‚é
 data "aws_availability_zones" "available" {
   state = "available"
   filter {
@@ -31,7 +31,7 @@ locals {
   ]
 }
 
-# ã‚µãƒ–ãƒãƒƒãƒˆã‚’ä½œæˆã™ã‚‹
+# ƒTƒuƒlƒbƒg‚ğì¬‚·‚é
 resource "aws_subnet" "subnet" {
   count             = length(data.aws_availability_zones.available.names)
   vpc_id            = aws_vpc.main.id
@@ -42,7 +42,7 @@ resource "aws_subnet" "subnet" {
   }
 }
 
-# ãƒ«ãƒ¼ãƒˆãƒ†ãƒ¼ãƒ–ãƒ«ã‚’ä½œæˆã™ã‚‹
+# ƒ‹[ƒgƒe[ƒuƒ‹‚ğì¬‚·‚é
 resource "aws_route_table" "rt" {
   vpc_id = aws_vpc.main.id
   route {
@@ -54,17 +54,17 @@ resource "aws_route_table" "rt" {
   }
 }
 
-# ã‚µãƒ–ãƒãƒƒãƒˆã«ãƒ«ãƒ¼ãƒˆãƒ†ãƒ¼ãƒ–ãƒ«ã‚’é–¢é€£ä»˜ã‘ã‚‹
+# ƒTƒuƒlƒbƒg‚Éƒ‹[ƒgƒe[ƒuƒ‹‚ğŠÖ˜A•t‚¯‚é
 resource "aws_route_table_association" "subnet_association" {
   count          = length(aws_subnet.subnet)
   subnet_id      = element(aws_subnet.subnet.*.id, count.index)
   route_table_id = aws_route_table.rt.id
 }
 
-# SSHã‚¢ã‚¯ã‚»ã‚¹ç”¨ã®ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚°ãƒ«ãƒ¼ãƒ—ã‚’ä½œæˆã™ã‚‹
+# SSHƒAƒNƒZƒX—p‚ÌƒZƒLƒ…ƒŠƒeƒBƒOƒ‹[ƒv‚ğì¬‚·‚é
 resource "aws_security_group" "ssh_access" {
   name        = "${var.test_prefix}-ssh-sg"
-  description = "ãƒãƒ¼ãƒˆ22ã§SSHã‚¢ã‚¯ã‚»ã‚¹ã‚’è¨±å¯ã™ã‚‹ã‚»ã‚­ãƒ¥ãƒªãƒ†ã‚£ã‚°ãƒ«ãƒ¼ãƒ—"
+  description = "ƒ|[ƒg22‚ÅSSHƒAƒNƒZƒX‚ğ‹–‰Â‚·‚éƒZƒLƒ…ƒŠƒeƒBƒOƒ‹[ƒv"
   vpc_id      = aws_vpc.main.id
 
   ingress {
